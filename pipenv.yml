@@ -1,0 +1,19 @@
+---
+- hosts: localhost
+  tasks:
+    - name: Install required packages
+      apt:
+        name: "{{ item }}"
+      loop:
+        - software-properties-common
+        - python-software-properties
+      become: true
+    - name: Add repository and update apt cache
+      apt_repository:
+        repo: ppa:pypa/ppa
+      become: true
+    - name: Install pipenv
+      apt:
+        name: pipenv
+      become: true
+
